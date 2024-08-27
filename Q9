@@ -1,0 +1,29 @@
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+public abstract class EventoDeDominio {
+
+    protected UUID idEvento;
+    protected LocalDateTime dataOcorrencia;
+
+    public EventoDeDominio() {
+        this.idEvento = UUID.randomUUID();
+        this.dataOcorrencia = LocalDateTime.now();
+    }
+
+    public UUID getIdEvento() {
+        return idEvento;
+    }
+
+    public LocalDateTime getDataOcorrencia() {
+        return dataOcorrencia;
+    }
+
+    @Override
+    public String toString() {
+        return "EventoDeDominio{" +
+                "idEvento=" + idEvento +
+                ", dataOcorrencia=" + dataOcorrencia +
+                '}';
+    }
+}

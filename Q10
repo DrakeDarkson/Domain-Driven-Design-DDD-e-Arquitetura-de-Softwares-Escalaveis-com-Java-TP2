@@ -1,0 +1,29 @@
+public class PedidoDespachado extends EventoDeDominio {
+
+    private UUID pedidoId;
+    private LocalDateTime dataDespacho;
+
+    public PedidoDespachado(UUID pedidoId, LocalDateTime dataDespacho) {
+        super(); // Chama o construtor da classe abstrata
+        this.pedidoId = pedidoId;
+        this.dataDespacho = dataDespacho;
+    }
+
+    public UUID getPedidoId() {
+        return pedidoId;
+    }
+
+    public LocalDateTime getDataDespacho() {
+        return dataDespacho;
+    }
+
+    @Override
+    public String toString() {
+        return "PedidoDespachado{" +
+                "pedidoId=" + pedidoId +
+                ", dataDespacho=" + dataDespacho +
+                ", idEvento=" + idEvento +
+                ", dataOcorrencia=" + dataOcorrencia +
+                '}';
+    }
+}

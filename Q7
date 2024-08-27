@@ -1,0 +1,89 @@
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+public class Pedido {
+
+    private UUID id;
+    private UUID clienteId;
+    private UUID produtoId;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataDespacho;
+    private StatusPedido status;
+
+    public Pedido(UUID clienteId, UUID produtoId) {
+        this.id = UUID.randomUUID();
+        this.clienteId = clienteId;
+        this.produtoId = produtoId;
+        this.dataCriacao = LocalDateTime.now();
+        this.status = StatusPedido.PENDENTE;
+    }
+
+    // Método de negócio para despachar o pedido
+    public void despacharPedido() {
+        if (this.status != StatusPedido.PENDENTE) {
+            throw new IllegalStateException("Pedido não pode ser despachado, pois não está pendente.");
+        }
+
+        this.dataDespacho = LocalDateTime.now();
+        this.status = StatusPedido.DESPACHADO;
+
+        publicarEventoDeDominio(new PedidoDespachado(this.id, this.dataDespacho));
+    }
+
+    // Simulação de um método para publicar o evento de domínio
+    private void publicarEventoDeDominio(PedidoDespachado evento) {
+        System.out.println("Evento publicado: " + evento);
+    }
+
+    // Getters and Setters
+    public UUID getId() {
+        return id;
+    }
+
+    public UUID getClienteId() {
+        return clienteId;
+    }
+
+    public UUID getProdutoId() {
+        return produtoId;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public LocalDateTime getDataDespacho() {
+        return dataDespacho;
+    }
+
+    public StatusPedido getStatus() {
+        return status;
+    }
+}
+
+// Enum para representar o status do pedido
+enum StatusPedido {
+    PENDENTE,
+    DESPACHADO,
+    ENTREGUE
+}
+
+// Classe que representa o evento de domínio
+class PedidoDespachado {
+
+    private UUID pedidoId;
+    private LocalDateTime dataDespacho;
+
+    public PedidoDespachado(UUID pedidoId, LocalDateTime dataDespacho) {
+        this.pedidoId = pedidoId;
+        this.dataDespacho = dataDespacho;
+    }
+
+    @Override
+    public String toString() {
+        return "PedidoDespachado{" +
+                "pedidoId=" + pedidoId +
+                ", dataDespacho=" + dataDespacho +
+                '}';
+    }
+}

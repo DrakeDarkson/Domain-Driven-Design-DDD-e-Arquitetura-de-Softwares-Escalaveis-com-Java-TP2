@@ -1,0 +1,59 @@
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+public class Agendamento {
+
+    private UUID id;
+    private UUID clienteId;
+    private UUID animalId;
+    private UUID veterinarioId;
+    private UUID servicoId;
+    private LocalDateTime dataHora;
+    private String local;
+
+    public Agendamento(UUID clienteId, UUID animalId, UUID veterinarioId, UUID servicoId, LocalDateTime dataHora, String local) {
+        this.id = UUID.randomUUID();
+        this.clienteId = clienteId;
+        this.animalId = animalId;
+        this.veterinarioId = veterinarioId;
+        this.servicoId = servicoId;
+        this.dataHora = dataHora;
+        this.local = local;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public UUID getClienteId() {
+        return clienteId;
+    }
+
+    public UUID getAnimalId() {
+        return animalId;
+    }
+
+    public UUID getVeterinarioId() {
+        return veterinarioId;
+    }
+
+    public UUID getServicoId() {
+        return servicoId;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void atualizarDataHora(LocalDateTime novaDataHora) {
+        this.dataHora = novaDataHora;
+    }
+
+    public void atualizarLocal(String novoLocal) {
+        this.local = novoLocal;
+    }
+}
